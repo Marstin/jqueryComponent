@@ -1,4 +1,4 @@
-require(['jquery'],function () {
+define(function () {
     $.fn.input = (options) => {
         let defaults = {
             name:'',
