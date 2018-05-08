@@ -12,10 +12,10 @@ require.config({
     },
     shim:{
         'input':{
-            deps:['jquery','css!component/css/input']
+            deps:['jquery','css!component/css/input','css!component/component.css']
         },
         'select':{
-            deps:['jquery','css!component/css/select']
+            deps:['jquery','css!component/css/select','css!component/component.css']
         }
     }
 });
