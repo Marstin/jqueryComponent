@@ -32,8 +32,8 @@ define(function () {
             this._bindChooseOption();
         };
         _bindChooseOption(){
-            $('#' + this.options.id).on("click",".dropdown",e => {
-                this._showOptions(e);
+            $('#' + this.options.id).on("click",".select-option",e => {
+                //this._showOptions(e);
             })
         };
         _bindDropDown(){
@@ -42,11 +42,14 @@ define(function () {
             })
         };
         _showOptions(e){
-            this._initOptions().then(this._showOptionsPanel);
+            this._initOptions().then(this._showOptionsPanel());
         };
         _showOptionsPanel(){
+            const node = $("#" + this.options.id);
             $('.select-panel').removeClass('display-none');
-            $('')
+            let top = node.offset().top;
+            let left = node.offset().left;
+            $('.select-panel').css({position: "absolute",'top':top+20,'left':left})
         };
         _emptyOptions(){
             $('.select-options').empty();
