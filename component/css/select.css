@@ -55,6 +55,9 @@
 }
 .select-option {
     height: 22px;
-    margin: 5px 0 3px 7px;
+    padding: 5px 0 3px 7px;
     cursor: pointer;
+}
+.select-option:hover {
+    background-color: #ecf3ff;
 }

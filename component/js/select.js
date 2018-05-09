@@ -6,20 +6,38 @@ define(function () {
             minHeight:'',
         };
         var options = $.extend({},defaults,parameter);
+
     };
     class Select {
         constructor(parameter){
-            this.options={
-                data:[1,2,3]
+            this.options = {
+                style:'',
+                id:'',
+                value:'',
+                data:[{name:'Jack',value:'student_1'},{name:'Martin',value:'student_2'},{name:'Robin',value:'student_3'}]
             };
             this.options = $.extend({},this.options,parameter);
-            console.log(this.options);
             {
-                this._bindDropDown();
+                this._initSelect();
             }
         };
+        _initSelect(){
+            this.bind();
+        };
+        set value(data){
+            this.value = data.value;
+        };
+        bind(){
+            this._bindDropDown();
+            this._bindChooseOption();
+        };
+        _bindChooseOption(){
+            $('#' + this.options.id).on("click",".dropdown",e => {
+                this._showOptions(e);
+            })
+        };
         _bindDropDown(){
-            $('#' + this.options.id + ' .dropdown').bind("click",e => {
+            $('#' + this.options.id).on("click",".dropdown",e => {
                 this._showOptions(e);
             })
         };
@@ -28,6 +46,7 @@ define(function () {
         };
         _showOptionsPanel(){
             $('.select-panel').removeClass('display-none');
+            $('')
         };
         _emptyOptions(){
             $('.select-options').empty();
@@ -42,7 +61,7 @@ define(function () {
             });
         };
         _insertOption(data){
-            $('.select-options').append("<div class=\"select-option\">" + data + "</div>")
+            $('.select-options').append("<div class=\"select-option\">" + data.name + "</div>")
         };
     }
     return Select;
