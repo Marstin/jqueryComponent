@@ -6,7 +6,6 @@ define(function () {
             minHeight:'',
         };
         var options = $.extend({},defaults,parameter);
-
     };
     class Select {
         constructor(parameter){
