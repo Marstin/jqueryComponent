@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01789854-713a-4aeb-818a-ab18e532c6bf" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/component/component.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/component/js/select.js" beforeDir="false" afterPath="$PROJECT_DIR$/component/js/select.js" afterDir="false" />
     </list>
@@ -27,20 +26,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="select.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="select.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/component/js/select.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="66" selection-end-column="10" />
+            <state relative-caret-position="342">
+              <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="component.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="component.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/component/component.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+            <state relative-caret-position="133">
+              <caret line="7" column="10" lean-forward="true" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -100,8 +99,8 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/control.js" />
         <option value="$PROJECT_DIR$/component/css/select.css" />
-        <option value="$PROJECT_DIR$/component/js/select.js" />
         <option value="$PROJECT_DIR$/component/component.js" />
+        <option value="$PROJECT_DIR$/component/js/select.js" />
       </list>
     </option>
   </component>
@@ -114,7 +113,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -199,11 +198,12 @@
       <workItem from="1525609382522" duration="3344000" />
       <workItem from="1525702745777" duration="3000000" />
       <workItem from="1526045106533" duration="882000" />
+      <workItem from="1526134048576" duration="305000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34996000" />
+    <option name="totallyTimeSpent" value="35301000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -548,17 +548,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/component/js/select.js">
+    <entry file="file://$PROJECT_DIR$/component/component.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="66" selection-end-column="10" />
+        <state relative-caret-position="133">
+          <caret line="7" column="10" lean-forward="true" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/component/component.js">
+    <entry file="file://$PROJECT_DIR$/component/js/select.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        <state relative-caret-position="342">
+          <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
         </state>
       </provider>
     </entry>

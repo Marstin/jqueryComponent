@@ -8,6 +8,15 @@ define(function () {
         var options = $.extend({},defaults,parameter);
     };
     class Select {
+        static setValue(p){
+
+        };
+        static setData(p){
+
+        };
+        static _set_value(){
+
+        };
         constructor(parameter){
             this.options = {
                 style:'',
