@@ -14,8 +14,8 @@ define(function () {
         static setData(p){
 
         };
-        static _set_value(){
-
+        static _set_value(value){
+            
         };
         constructor(parameter){
             this.options = {
