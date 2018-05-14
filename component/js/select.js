@@ -21,40 +21,77 @@ define(function () {
 
         };
         static setOptions(){
-            Select
+
         };
         static _set_optionse(){
 
         }
         constructor(parameter){
-            this.options = {
+            this.component = {
                 style:'',
+                componentId:'',
                 id:'',
                 value:'',
-                data:[{name:'Jack',value:'student_1'},{name:'Martin',value:'student_2'},{name:'Robin',value:'student_3'}],
-                onSelect:function () {
+                options:[{name:'Jack',value:'student_1'},{name:'Martin',value:'student_2'},{name:'Robin',value:'student_3'}],
+                onInitFinish:function () {
 
                 },
-                onExpand:function () {
-
+                getValue:function () {
+                    return this.value;
+                },
+                getData:function () {
+                    return this.data;
                 }
             };
-            this.options = $.extend({},this.options,parameter);
+            this.component = $.extend({},this.component,parameter);
+            this.convertData.apply(this.component);
             {
-                this._initSelect();
+                this.initSelect();
             }
         };
+        convertData(){
+            this.componentId = this.id + "-" + 'select-component';
+            this.componentPanelId = this.id + "-" + 'select-component-panel';
+        };
         onSelect(){
-            this.options.onSelect.apply(this.options);
+            this._bindUserFunc(this.component.onSelect);
         };
         onLoad(){
 
         };
         onExpand(){
-            this.options.onExpand.apply(this.options);
+            this._bindUserFunc(this.component.onExpand);
         };
-        _initSelect(){
+        onContract(){
+            this._bindUserFunc(this.component.onContract);};
+        initSelect(){
+            this._initSelect.apply(this.component);
             this.bind();
+            this._bindUserFunc(this.component.onInitFinish);
+        };
+        _bindUserFunc(func){
+            if(func != null){
+                func.apply(this.component);
+            }
+        }
+        _initSelect(){
+            const node = $('#' + this.id);
+            node.after('<span id="'+ this.componentId + '" class="select" ctype="select" style="left:80px;margin-left:80px;width: 180px;height:20px;">\n' +
+                '        <span class="dropdown">\n' +
+                '            <span class="arrow-bottom"></span>\n' +
+                '        </span>\n' +
+                '        <span class="input-box">\n' +
+                '            <input class="select-input">\n' +
+                '        </span>\n' +
+                '    </span>');
+            node.after("<div class=\"select-panel display-none\" id=\"" + this.componentPanelId +"\" style=\"width: 180px;\">\n" +
+                "        <div class=\"select-options\">\n" +
+                "            <div class=\"select-option\">1</div>\n" +
+                "            <div class=\"select-option\">1</div>\n" +
+                "            <div class=\"select-option\">1</div>\n" +
+                "        </div>\n" +
+                "    </div>");
+            node.addClass('display-none');
         };
         get value(){
             return this.data.value;
@@ -67,24 +104,33 @@ define(function () {
             this._bindChooseOption();
         };
         _bindChooseOption(){
-            $(document).on("click",".select-option",e => {
+            $("#" + this.component.componentPanelId).on("click",".select-option",e => {
                 this.data = e.currentTarget.datavalue;
                 $('.select-panel').addClass('display-none');
-                $('#' + this.options.id + " .select-input").val(this.name);
-                $('#' + this.options.id)[0].componentdata = this.data;
-                $('#' + this.options.id)[0].componentvalue = this.value;
+                $('#' + this.component.id + " .select-input").val(this.name);
+                $('#' + this.component.componentId + " .select-input").val(this.name);
+                $('#' + this.component.id)[0].componentdata = this.data;
+                $('#' + this.component.id)[0].componentvalue = this.value;
+                this.component.value = this.value;
+                this.component.data = this.data;
                 this.onSelect();
             })
         };
         _bindDropDown(){
-            $('#' + this.options.id).on("click",".dropdown",e => {
-                this.onExpand();
-                this._showOptions(e);
+            $('#' + this.component.componentId).on("click",".dropdown",e => {
+                const selectPanel = $("#" + this.component.componentPanelId);
+                selectPanel.hasClass('display-none') ? (()=>{
+                    this.onExpand();
+                    this._showOptions(e);
+                })() :(()=>{
+                    this.onContract();
+                    this._hideOptions(e);
+                })();
             })
         };
         getValue(id){
             return id == null || id === '' ? () => {
-                return this.value || $('#' + this.options.id)[0].componentvalue;
+                return this.value || $('#' + this.component.id)[0].componentvalue;
             }:() => {
                 return $('#' + id)[0].componentvalue;
             };
@@ -92,36 +138,40 @@ define(function () {
         };
         getData(id){
             return id == null || id === '' ? () => {
-                return this.data || $('#' + this.options.id)[0].componentdata;
+                return this.data || $('#' + this.component.id)[0].componentdata;
             }:() => {
                 return $('#' + id)[0].componentdata;
             };
         };
+        _hideOptions(e){
+            $("#" + this.component.componentPanelId).addClass('display-none');
+        };
         _showOptions(e){
-            Select._initOptions(this.options).then(this._showOptionsPanel());
+            this._initOptions(this.component.options);
+            this._showOptionsPanel.apply(this.component);
         };
         _showOptionsPanel(){
-            const node = $("#" + this.options.id);
-            $('#' )
-            $('.select-panel').removeClass('display-none');
-            let top = node.offset().top;
-            let left = node.offset().left;
-            $('.select-panel').css({position: "absolute",'top':top+20,'left':left})
+            const select = $("#" + this.componentId);
+            const selectPanel = $("#" + this.componentPanelId);
+            let top = select.offset().top;
+            let left = select.offset().left;
+            selectPanel.css({position: "absolute",'top':top+20,'left':left})
+            selectPanel.removeClass('display-none')
         };
         _emptyOptions(){
-            $('.select-options').empty();
+            $('#'+ this.componentPanelId +' .select-options').empty();
         };
         _initOptions(options){
-            this._emptyOptions();
-            options.data.forEach(data => {
-                Select._insertOption(data)
+            this._emptyOptions.apply(this.component);
+            options.forEach(data => {
+                this._insertOption.call(this.component,data)
             });
-            return new Promise(resolve => {
+            /*return new Promise(resolve => {
                 resolve();
-            });
+            });*/
         };
         _insertOption(data){
-            let node = $("<div class=\"select-option\">" + data.name + "</div>").appendTo('.select-options');
+            let node = $("<div class=\"select-option\">" + data.name + "</div>").appendTo("#" + this.componentPanelId +' .select-options');
             node[0].datavalue = data;
         };
     }

@@ -6,15 +6,52 @@ define(function () {
     $.fn.setValue = function (data) {
         const node = this.first();
         const type = node.attr('ctype');
-        Component.setValue.call(node,type,data);
+        Common.setValue.call(node,type,data);
     };
-    class Component{
+    $.fn.initComponent = function () {
+        this.each(function () {
+            const node = $(this);
+            const type = node.attr('ctype');
+            Common.initComponent.call(node,type);
+        })
+    };
+    class Common{
         static setValue(type,data){
-            console.log(Component)
-            require([type],component => {
-                console.log(this);
-                component.setValue.apply(this,[data])
+            require([type],Component => {
+                Component.setValue.apply(this,[data])
             })
         }
+
+        static initComponent(type){
+            require([type],Component => {
+                var obj = {};
+                Common.setProperty.call(this,obj,['id','name']);
+                Common.setOptions.call(this,obj);
+                new Component(obj);
+            })
+        }
+
+        static setProperty(obj,pl){
+            pl.forEach((p)=>{
+                let pv = this.attr(p);
+                pv != null ? (()=>{
+                    obj[p] = pv;
+                })() : (()=>{
+                    return;
+                })();
+            });
+        };
+
+        static setOptions(obj){
+            let pv = this.attr('options');
+            pv != null ? (()=>{
+                obj.options = JSON.parse(pv);
+            })() : (()=>{
+                return;
+            })();
+        };
+    }
+    {
+        $('[ctype]').initComponent();
     }
 });
