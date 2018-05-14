@@ -7,7 +7,7 @@
 <body>
     <span class="test"></span>
     <br>
-    <span id="select-component" class="select" style="left:80px;margin-left:80px;width: 180px;height:20px;">
+    <span id="select-component" class="select" ctype="select" style="left:80px;margin-left:80px;width: 180px;height:20px;">
         <span class="dropdown">
             <span class="arrow-bottom"></span>
         </span>
@@ -23,10 +23,11 @@
         </div>
     </div>
     <!--<div class=""><-->
-<script type="text/javascript" src="common/require.min.js"></script>
-<script type="text/javascript" src="config/require.config.js"></script>
-<script type="text/javascript">
-    require(['control.js']);
-</script>
+    <script type="text/javascript" src="util/require.min.js"></script>
+    <script type="text/javascript" src="config/require.config.js"></script>
+    <script type="text/javascript" src="util/jquery.min.js"></script>
+    <script type="text/javascript">
+        require(['control.js']);
+    </script>
 </body>
 </html>

@@ -1,59 +1,108 @@
 define(function () {
-    $.fn.select = (parameter) => {
-        let defaults = {
-            name:'',
-            maxHeight:'',
-            minHeight:'',
-        };
-        var options = $.extend({},defaults,parameter);
-    };
     class Select {
+        static getValue(params){
+            return 0;
+            //this._getValue_selector.apply(this,params);
+        };
+        static _getValue_selector(){
+
+        };
+        static _getValue_node(){
+
+        };
         static setValue(p){
+            Select._set_value.call(this,p)
+        };
+        static _set_value(data){
+            let node = this[0];
+            node.componentdata = data;
+            node.componentvalue = data.value;
+            $('#' + node.id + " .select-input").val(data.name);
 
         };
-        static setData(p){
+        static setOptions(){
+            Select
+        };
+        static _set_optionse(){
 
-        };
-        static _set_value(value){
-            
-        };
+        }
         constructor(parameter){
             this.options = {
                 style:'',
                 id:'',
                 value:'',
-                data:[{name:'Jack',value:'student_1'},{name:'Martin',value:'student_2'},{name:'Robin',value:'student_3'}]
+                data:[{name:'Jack',value:'student_1'},{name:'Martin',value:'student_2'},{name:'Robin',value:'student_3'}],
+                onSelect:function () {
+
+                },
+                onExpand:function () {
+
+                }
             };
             this.options = $.extend({},this.options,parameter);
             {
                 this._initSelect();
             }
         };
+        onSelect(){
+            this.options.onSelect.apply(this.options);
+        };
+        onLoad(){
+
+        };
+        onExpand(){
+            this.options.onExpand.apply(this.options);
+        };
         _initSelect(){
             this.bind();
         };
-        set value(data){
-            this.value = data.value;
+        get value(){
+            return this.data.value;
+        };
+        get name(){
+            return this.data.name;
         };
         bind(){
             this._bindDropDown();
             this._bindChooseOption();
         };
         _bindChooseOption(){
-            $('#' + this.options.id).on("click",".select-option",e => {
-                //this._showOptions(e);
+            $(document).on("click",".select-option",e => {
+                this.data = e.currentTarget.datavalue;
+                $('.select-panel').addClass('display-none');
+                $('#' + this.options.id + " .select-input").val(this.name);
+                $('#' + this.options.id)[0].componentdata = this.data;
+                $('#' + this.options.id)[0].componentvalue = this.value;
+                this.onSelect();
             })
         };
         _bindDropDown(){
             $('#' + this.options.id).on("click",".dropdown",e => {
+                this.onExpand();
                 this._showOptions(e);
             })
         };
+        getValue(id){
+            return id == null || id === '' ? () => {
+                return this.value || $('#' + this.options.id)[0].componentvalue;
+            }:() => {
+                return $('#' + id)[0].componentvalue;
+            };
+
+        };
+        getData(id){
+            return id == null || id === '' ? () => {
+                return this.data || $('#' + this.options.id)[0].componentdata;
+            }:() => {
+                return $('#' + id)[0].componentdata;
+            };
+        };
         _showOptions(e){
-            this._initOptions().then(this._showOptionsPanel());
+            Select._initOptions(this.options).then(this._showOptionsPanel());
         };
         _showOptionsPanel(){
             const node = $("#" + this.options.id);
+            $('#' )
             $('.select-panel').removeClass('display-none');
             let top = node.offset().top;
             let left = node.offset().left;
@@ -62,17 +111,18 @@ define(function () {
         _emptyOptions(){
             $('.select-options').empty();
         };
-        _initOptions(){
+        _initOptions(options){
             this._emptyOptions();
-            this.options.data.forEach(data => {
-                this._insertOption(data)
+            options.data.forEach(data => {
+                Select._insertOption(data)
             });
             return new Promise(resolve => {
                 resolve();
             });
         };
         _insertOption(data){
-            $('.select-options').append("<div class=\"select-option\">" + data.name + "</div>")
+            let node = $("<div class=\"select-option\">" + data.name + "</div>").appendTo('.select-options');
+            node[0].datavalue = data;
         };
     }
     return Select;

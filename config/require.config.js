@@ -1,21 +1,22 @@
 require.config({
     baseUrl:'',
     paths:{
-        'jquery':'common/jquery.min',
         'input':'component/js/input',
         'select':'component/js/select',
+        'common':'component/component'
     },
     map: {
         '*': {
-            'css': 'common/css.min'
+            'css': 'util/css.min'
         }
     },
     shim:{
+        'common':{deps:['jquery']},
         'input':{
-            deps:['jquery','css!component/css/input','css!component/component.css']
+            deps:['common','css!component/css/input','css!component/component']
         },
         'select':{
-            deps:['jquery','css!component/css/select','css!component/component.css']
+            deps:['common','css!component/css/select','css!component/component']
         }
     }
 });
