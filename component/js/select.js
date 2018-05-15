@@ -4,14 +4,35 @@ define(function () {
             return 0;
             //this._getValue_selector.apply(this,params);
         };
-        static _getValue_selector(){
-
-        };
-        static _getValue_node(){
-
-        };
         static setValue(p){
             Select._set_value.call(this,p)
+        };
+        onExpand(){
+            this._bindUserFunc(this.component.onExpand);
+        };
+        onContract(){
+            this._bindUserFunc(this.component.onContract);
+        };
+        onInitFinish(){
+            this._bindUserFunc(this.component.onInitFinish);
+        };
+        onSelect(value,data){
+            this._bindUserFunc(this.component.onSelect,[value,data]);
+        };
+        getValue(){
+
+        };
+        setValue(data){
+
+        };
+        getData(){
+
+        };
+        setOptions(){
+
+        };
+        onLoadData(){
+
         };
         static _set_value(data){
             let node = this[0];
@@ -20,12 +41,6 @@ define(function () {
             $('#' + node.id + " .select-input").val(data.name);
 
         };
-        static setOptions(){
-
-        };
-        static _set_optionse(){
-
-        }
         constructor(parameter){
             this.component = {
                 style:'',
@@ -53,25 +68,18 @@ define(function () {
             this.componentId = this.id + "-" + 'select-component';
             this.componentPanelId = this.id + "-" + 'select-component-panel';
         };
-        onSelect(){
-            this._bindUserFunc(this.component.onSelect);
-        };
         onLoad(){
 
         };
-        onExpand(){
-            this._bindUserFunc(this.component.onExpand);
-        };
-        onContract(){
-            this._bindUserFunc(this.component.onContract);};
+
         initSelect(){
             this._initSelect.apply(this.component);
             this.bind();
-            this._bindUserFunc(this.component.onInitFinish);
+            this.onInitFinish();
         };
-        _bindUserFunc(func){
+        _bindUserFunc(func,p){
             if(func != null){
-                func.apply(this.component);
+                func.apply(this.component,p);
             }
         }
         _initSelect(){
@@ -113,7 +121,7 @@ define(function () {
                 $('#' + this.component.id)[0].componentvalue = this.value;
                 this.component.value = this.value;
                 this.component.data = this.data;
-                this.onSelect();
+                this.onSelect(this.value,this.data);
             })
         };
         _bindDropDown(){

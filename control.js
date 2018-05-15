@@ -2,11 +2,14 @@ require(['input','select'],function (input,Select) {
     let select1 = new Select({
         id:'test1',
         onExpand:function () {
-            console.log(1)
+            //console.log(1)
         },
         onSelect:function () {
-            console.log(this)
-            console.log(this.getValue())
+            console.log(1);
+            select1.onSelect = () => {
+                console.log(2);
+            };
+
         }
     });
 

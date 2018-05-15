@@ -10,13 +10,20 @@
     <input type="text" id="test1">
     <input type="text" id="test2">
     <input type="text" id="test3" ctype="select">
-    <input type="text" id="test4" ctype="select" options="[{'name':'one','value':'1'},{'name':'two','value':'2'}]">
+    <input type="text" id="test4" ctype="select" options='[{"name":"one","value":1},{"name":"two","value":2}]' onSelect="onSelect">
     <!--<div class=""><-->
     <script type="text/javascript" src="util/require.min.js"></script>
     <script type="text/javascript" src="config/require.config.js"></script>
     <script type="text/javascript" src="util/jquery.min.js"></script>
     <script type="text/javascript">
         require(['control.js']);
+        var onSelect = (value,data) => {
+            console.log(onSelect);
+            onSelect = () => {
+                console.log(onSelect);
+            };
+            console.log(onSelect);
+        }
     </script>
 </body>
 </html>
